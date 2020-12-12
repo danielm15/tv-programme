@@ -1,2 +1,2 @@
 # tv-programme
-Reads tv-channel program information from web services
+Reads tv-channel programme information from web services
