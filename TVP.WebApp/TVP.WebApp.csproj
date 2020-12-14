@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+  </PropertyGroup>
+
+
+  <ItemGroup>
+    <ProjectReference Include="..\TVP.Repositories\TVP.Repositories.csproj" />
+    <ProjectReference Include="..\TVP.Services\TVP.Services.csproj" />
+    <ProjectReference Include="..\TVP.Common\TVP.Common.csproj" />
+    <ProjectReference Include="..\TVP.Models\TVP.Models.csproj" />
+  </ItemGroup>
+
+</Project>
