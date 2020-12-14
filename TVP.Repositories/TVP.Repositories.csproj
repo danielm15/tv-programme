@@ -5,11 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="10.1.1" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\TVP.Models\TVP.Models.csproj" />
+    <ProjectReference Include="..\TVP.Common\TVP.Common.csproj" />
   </ItemGroup>
 
 </Project>

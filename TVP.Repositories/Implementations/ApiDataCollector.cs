@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
@@ -6,8 +7,9 @@ using Newtonsoft.Json;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using TVP.Models.Entities;
-using System;
+using TVP.Models.Dtos;
 using TVP.Repositories.Interfaces;
+using AutoMapper;
 
 namespace TVP.Repositories.Implementations
 {
@@ -17,10 +19,12 @@ namespace TVP.Repositories.Implementations
         private const string _stod2url = "https://api.stod2.is/dagskra/api/";
         private const string _ruvurl = "http://apis.is/tv/ruv";
         private HttpClient _client;
+        private IMapper _mapper;
 
-        public ApiDataCollector()
+        public ApiDataCollector(IMapper mapper)
         {
-             _client = new HttpClient();
+            _mapper = mapper;
+            _client = new HttpClient();
         }
 
         // Retrieves list of channels from Stöð2 API
@@ -39,34 +43,41 @@ namespace TVP.Repositories.Implementations
         }
 
         // Retrieves the programme list from Stöð2 API
-        public async Task<IEnumerable<ProgrammeItem>> GetStod2ProgrammeForChannel(string channel)
+        public async Task<IEnumerable<ProgrammeItemDto>> GetStod2ProgrammeForChannel(string channel)
         {
             var response = await _client.GetAsync($"{_stod2url + channel}");
 
             if(response.StatusCode == HttpStatusCode.NotFound)
             {
-                return Enumerable.Empty<ProgrammeItem>();
+                return Enumerable.Empty<ProgrammeItemDto>();
             }
 
             var content = await response.Content.ReadAsStringAsync();
 
-            return JsonConvert.DeserializeObject<List<ProgrammeItem>>(content);
+            // Convert JSON string to entity object list.
+            var entityList = JsonConvert.DeserializeObject<List<ProgrammeItem>>(content);
+
+            // Map entity objects to DTO's and return the list.
+            return _mapper.Map<IEnumerable<ProgrammeItemDto>>(entityList);
         }
 
         // Retrieves root JSON object from RÚV API and returns the programme list
-        public async Task<IEnumerable<RuvProgrammeItem>> GetRUVProgramme()
+        public async Task<IEnumerable<RuvProgrammeItemDto>> GetRUVProgramme()
         {
             var response = await _client.GetAsync($"{_ruvurl}");
 
             if(response.StatusCode == HttpStatusCode.NotFound)
             {
-                return null;
+                return Enumerable.Empty<RuvProgrammeItemDto>();
             }
 
             var content = await response.Content.ReadAsStringAsync();
 
-            return JsonConvert.DeserializeObject<RuvProgrammeList>(content).results;
+            // Convert JSON string to entity object list.
+            var entityList = JsonConvert.DeserializeObject<RuvProgrammeList>(content).results;
 
+            // Map entity objects to DTO's and return the list.
+            return _mapper.Map<IEnumerable<RuvProgrammeItemDto>>(entityList);
         }
     }
 }

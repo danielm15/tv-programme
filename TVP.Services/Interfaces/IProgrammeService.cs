@@ -1,13 +1,11 @@
-using System;
-using System.Threading.Tasks;
 using System.Collections.Generic;
 using TVP.Models.Dtos;
+using System.Threading.Tasks;
 
-namespace TVP.Repositories.Interfaces
+namespace TVP.Services.Interfaces
 {
-    public interface IApiDataCollector
+    public interface IProgrammeService
     {
-        Task<IEnumerable<String>> GetStod2Channels();
         Task<IEnumerable<ProgrammeItemDto>> GetStod2ProgrammeForChannel(string channel);
         Task<IEnumerable<RuvProgrammeItemDto>> GetRUVProgramme();
     }
