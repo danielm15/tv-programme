@@ -21,4 +21,4 @@ SDK 3.0.100, Runtime 3.0.0
 
 ## Keyra forritið
 
-Til að keyra forritið þarf keyra #"dotnet restore" inni í tv-programme skjalinu og fara síðan inn í TVP.WebApp og keyra #"dotnet run"
+Til að keyra forritið þarf keyra **dotnet restore** inni í tv-programme skjalinu og fara síðan inn í TVP.WebApp og keyra **dotnet run**
