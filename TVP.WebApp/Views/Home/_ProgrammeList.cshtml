@@ -1,0 +1,132 @@
+@model IndexViewModel
+<div class="schedule-banner">
+    <div class="schedule-header container">
+        <div class="channel-selector">
+            <div class="row channel-list" data-toggle="buttons" role="group" aria-label="Veldu stöð">
+                @foreach(var channel in Model.selectedChannel)
+                {
+                    if(channel.IsSelected) 
+                    {
+                        <a class="channel-link col-xs-6 col-lg-3" data-ajax="true" data-ajax-method="GET" data-ajax-mode="replace"
+                            data-ajax-update="#schedulePartialView" href="/Home/GetStod2Programme/@channel.ChannelName/@Model.currentDate">
+                            <div class="btn btn-light channel-div active">
+                                <input class="channel-radio-button" type="radio" name="selectedChannel" autocomplete="off" checked>
+                                <img src="~/images/svg/@(channel.ChannelName).svg">
+                            </div>
+                        </a>
+                    }
+                    else
+                    {
+                        <a class="channel-link col-xs-6 col-lg-3" data-ajax="true" data-ajax-method="GET" data-ajax-mode="replace"
+                            data-ajax-update="#schedulePartialView" href="/Home/GetStod2Programme/@channel.ChannelName/@Model.currentDate">
+                            <div class="btn btn-light channel-div">
+                                <input class="channel-radio-button" type="radio" name="selectedChannel" autocomplete="off">
+                                <img src="~/images/svg/@(channel.ChannelName).svg">
+                            </div>
+                        </a>
+                    }
+                }
+                <a class="channel-link col-xs-6 col-lg-3" data-ajax="true" data-ajax-method="GET" data-ajax-mode="replace"
+                    data-ajax-update="#schedulePartialView" href="/Home/GetRuvProgramme">
+                    <div class="btn btn-light channel-div ruv-container">
+                        <input class="channel-radio-button" type="radio" name="selectedChannel" autocomplete="off">
+                        <img class="ruv-logo" src="~/images/ruv_logo.png">
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="day-selector">
+            <div class="row btn-group date-list" data-toggle="buttons" role="group" aria-label="Veldu dag">
+                @foreach(var item in Model.selectedDate)
+                {
+                    if(item.IsSelected)
+                    {
+                        <a class="date-link col-xs-6 col-sm-3" data-ajax="true" data-ajax-method="GET" data-ajax-mode="replace"
+                            data-ajax-update="#schedulePartialView" href="/Home/GetStod2Programme/@Model.currentChannel/@item.Date">
+                            <div class="date-button btn btn-dark active">
+                                <input class="channel-radio-button" type="radio" autocomplete="off" checked>
+                                @item.Date.ToString("MMMM dd").ToUpper()
+                            </div>
+                        </a>
+                    }
+                    else
+                    {
+                        <a class="date-link col-xs-6 col-sm-3" data-ajax="true" data-ajax-method="GET" data-ajax-mode="replace"
+                            data-ajax-update="#schedulePartialView" href="/Home/GetStod2Programme/@Model.currentChannel/@item.Date">
+                            <div class="date-button btn btn-dark">
+                                <input class="channel-radio-button" type="radio" autocomplete="off">
+                                @item.Date.ToString("MMMM dd").ToUpper()
+                            </div>
+                        </a>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container programme-info">
+    <table class="table">
+        <thead class="container">
+            <tr class="row table-row-header">
+                <th class="col table-header-time"><p>Tími</p></th>
+                <th class="col-9 table-header-name"><p>Dagskrárliður</p></th>
+                <th class="col-2 table-header-info"><p>Nánar</p></th>
+            </tr>
+        </thead>
+        <tbody class="programme-list-body container">  
+        @{ int i = 0; }
+        @if(Model.ruvProgrammeList == null)
+        {
+            @foreach (var programmeItem in Model.programmeList)
+            {
+                i = i + 1;
+                <tr class="row programme-list-row" href="#collapseId@(i)" role="button" aria-expanded="false" aria-controls="collapseId" data-toggle="collapse">
+                    <td class="col table-row-time">@programmeItem.StartTime.ToString("H:mm")</td>
+                    <td class="col-9 programme-item-title">
+                        <p>
+                            <strong>@programmeItem.Title</strong>
+                            <span class="dot dot--@(programmeItem.PgRating.ToLower())"></span>
+                            @if(programmeItem.EpisodeNumber != 0)
+                            {
+                                <em>S@(programmeItem.SeriesNumber + "E" + @programmeItem.EpisodeNumber) </em>
+                            }
+                        </p>
+                    </td>
+                    <td class="col-2">
+                        <a class="details-trigger" data-toggle="collapse" href=#collapseId@(i) role="button" aria-expanded="false" aria-controls="collapseId">
+                            <img src="~/images/svg/plus.svg">
+                        </a>
+                    </td>
+                </tr>
+                <td class="item-details collapse" id="collapseId@(i)">
+                    <p>@programmeItem.Description</p>
+                </td>
+            }
+        }
+        else
+        {
+            @foreach (var ruvProgrammeItem in Model.ruvProgrammeList)
+            {
+                i = i + 1;
+                <tr class="row programme-list-row" href="#collapseId@(i)" role="button" aria-expanded="false" aria-controls="collapseId" data-toggle="collapse">
+                    <td class="col table-row-time">@ruvProgrammeItem.StartTime.ToString("H:mm")</td>
+                    <td class="col-9 programme-item-title">
+                        <p>
+                            <strong>@ruvProgrammeItem.Title</strong>
+                            <em>S@(ruvProgrammeItem.SeriesNumber + "E" + @ruvProgrammeItem.EpisodeNumber)</em>
+                        </p>
+                    </td>
+                    <td class="col-2">
+                        <a class="details-trigger" data-toggle="collapse" href=#collapseId@(i) role="button" aria-expanded="false" aria-controls="collapseId">
+                            <img src="~/images/svg/plus.svg">
+                        </a>
+                    </td>
+                </tr>
+                <td class="item-details collapse" id="collapseId@(i)">
+                    <p>@ruvProgrammeItem.Description</p>
+                </td>
+            }
+        }
+        </tbody>
+    </table>
+</div>

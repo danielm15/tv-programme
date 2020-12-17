@@ -1,0 +1,234 @@
+.main-container {
+    padding: 0px;
+}
+
+.main-nav {
+    background: rgb(97,161,172);
+    background: linear-gradient(0deg, rgba(97,161,172,1) 0%, rgba(31,83,89,0.8981481481481481) 80%);
+    border: 0 !important;
+    box-shadow: 0 0 0 0 !important;
+    padding: 25px;
+}
+
+.schedule-header {
+    padding: 0px;
+}
+
+.schedule-banner {
+    background: rgb(255,255,255);
+    background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(97,161,172,1) 100%);
+    padding: 25px;
+}
+
+.programme-info {
+    padding: 0;
+}
+
+.channel-radio-button {
+    opacity: 0;
+    width: 0;
+    height: 0;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+}
+
+.channel-list {
+    flex-wrap: wrap;
+    margin-left: 0;
+    margin-right: 0;
+    margin-bottom: 50px;
+}
+
+.date-list {
+    flex-wrap: wrap;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.date-link {
+    padding: 5px;
+    width: 100px;
+}
+
+.channel-div {
+    background-color: transparent !important;
+    border-color: transparent !important;
+    transition: transform .2s;
+    padding: 0px;
+}
+
+.channel-div.active {
+    box-shadow: 0px 0px 10px white;
+    background-color: white !important;
+    border: 0;
+}
+
+.channel-div:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 0px 10px white;
+}
+
+.date-button {
+    transition: transform .2s;
+    background-color: transparent;
+    border-radius: 0;
+    color: rgb(56, 56, 56) !important;
+    font-weight: bold;
+}
+
+.date-button:hover {
+    box-shadow: 0px 0px 10px white;
+    transform: scale(1.05);
+    z-index: 1;
+    background-color: rgb(60, 56, 54) !important;
+    color: white !important;
+}
+
+.date-button.active {
+    box-shadow: 0px 0px 10px white;
+    background-color: rgb(60, 56, 54) !important;
+    color: white !important;
+}
+
+.day-selector {
+    margin-bottom: 50px;
+}
+
+.ruv-logo {
+    max-width: 100%;
+    height: 28px;
+    padding: 2px;
+    display: block;
+    background-color: rgb(48, 48, 48) 
+}
+
+.channel-link {
+    height: auto;
+    width: 200px;
+    padding-left: 0px;
+}
+
+.schedule {
+    width: 100%;
+}
+
+.programme-list-row {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    height: 75px;
+    pointer-events: auto;
+    cursor: pointer;
+}
+
+.programme-list-row:hover {
+    background-color: lightgray;
+}
+
+.table-header {
+    text-transform: uppercase;
+}
+
+.table-header-info p {
+    float: right;
+    padding-right: 33px;
+}
+
+.table-header-time {
+    padding-left: 25px !important;
+}
+
+.table-row-time {
+    padding-left: 25px !important;
+    padding-top: 25px !important;
+}
+
+.details-trigger {
+    position: absolute;
+    top: 25px;
+    right: 55px;
+}
+
+.programme-item-description {
+    padding-right: 40px;
+}
+
+.table-row-header {
+    flex-wrap: nowrap;
+    flex-direction: row;
+}
+
+.programme-item-title {
+    font-weight: bold;
+    padding-top: 25px !important;
+    display: flex;
+    height: auto;
+    align-items: center;
+}
+
+
+.item-info {
+    list-style-type: none;
+}
+
+.dot {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 10px;
+    width: 25px;
+    height: 25px;
+    color: #fff;
+    border-radius: 50%;
+    font-size: 13px;
+    font-weight: 900;
+    line-height: 1;
+    flex: 25px 1;
+    min-width: 25px;
+    max-width: 25px;
+    order: 2;
+}
+
+.dot--green {
+    background: #71a238;
+}
+
+.dot--yellow {
+    background:rgb(211, 198, 29)
+}
+
+.dot--red {
+    background:rgb(175, 31, 48)
+}
+
+.dot--green:before {
+    content: "L";
+}
+
+.dot--yellow:before {
+    content: "12";
+}
+
+.dot--red:before {
+    content: "16";
+}
+
+.programme-item-title em {
+    order: 3;
+    color: #949494;
+    font-size: 17px;
+    font-style: italic;
+    font-weight: 400;
+    margin-left: 10px;
+}
+
+.programme-item-title p {
+    order: 1;
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+}
+
+.item-details p {
+    padding: 10px 0px 0px 15px;
+}
